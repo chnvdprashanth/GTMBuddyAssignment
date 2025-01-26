@@ -29,7 +29,7 @@ This project implements an end-to-end NLP pipeline for multi-label text classifi
 ### **2. Install Dependencies**  
 Clone the repository and navigate to the project folder:  
 ```bash  
-git clone https://github.com/chnvdprashanth/GTMBuddyAssgiment.git  
+git clone https://github.com/chnvdprashanth/GTMBuddyAssignment.git  
 cd ./ 
 ```  
 
@@ -85,12 +85,15 @@ python app.py
 ```
 ├── app.py                # Flask REST API script  
 ├── models/               # Folder containing saved models  
-│   ├── classifier.pkl    # Multi-label classification model  
-│   ├── ner_model/        # Fine-tuned SpaCy NER model  
-├── domain_knowledge.json # Dictionary for entity lookup  
+│   ├── multi_label_classifier_logreg.pkl   # Multi-label Logistic Regression classification model
+│   ├── multi_label_classifier_svm.pkl   # Multi-label SVM classification model
+│   ├── multi_label_classifier_rf.pkl   # Multi-label Random Forest classification model
+├── ner_model_spacy/        # Fine-tuned SpaCy NER model  
 ├── requirements.txt      # Python dependencies  
 ├── README.md             # Project documentation  
 └── data/                 # Optional folder for datasets  
+    ├── call_dataset.csv  # Synthetic dataset  
+    ├── domain_knowledge.json # Dictionary for entity lookup  
 ```  
 
 ---
