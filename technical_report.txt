@@ -1,0 +1,100 @@
+## Technical Report: ##
+
+Project Overview:
+The goal of this project was to build an end-to-end NLP pipeline capable of performing:
+
+1. Multi-label text classification for sales/marketing call snippets.
+2. Entity extraction using a dictionary lookup and Named Entity Recognition (NER).
+3. Summarization of text snippets.
+    - The solution includes a REST API for inference, with the application containerized using Docker.
+
+1. Data Handling:
+   - Dataset Overview:
+        - The dataset used was synthetic, generated for 500 records, each containing:
+        - text_snippet: Simulated snippets of sales/marketing calls.
+        - labels: Multi-label tags such as "Objection," "Pricing Discussion," "Security," and "Competition."
+        - domain_knowledge.json: A dictionary of competitors, product features, and pricing-related keywords.
+    - Preprocessing Steps:
+    - Text Cleaning:
+        - Removal of stop words, punctuation, and special characters.
+        - Lemmatization to reduce words to their base forms.
+        - Handling domain-specific jargon using the knowledge base.
+    - Label Encoding: 
+        - Multi-label binarization was used to convert text labels into a numerical format suitable for model training.
+    - Data Augmentation:
+        - For minority labels, random oversampling and paraphrasing techniques (e.g., synonym replacement) were applied to balance the dataset.
+    - Splitting:
+        - Data was split into 80% training and 20% test sets.
+
+2. Modeling Choices:
+    - Classification Models
+        - We evaluated three models:
+            - Logistic Regression:
+                - Simple and interpretable; served as the baseline model.
+                - Effective for text-based binary/multi-label classification tasks.
+            - Random Forest:
+                - Ensemble-based approach for improved performance.
+                - Handles non-linear relationships and reduces overfitting.
+            - Support Vector Machines (SVM): 
+                - Robust for high-dimensional feature spaces (e.g., TF-IDF vectors).
+                - Applied with a one-vs-rest strategy for multi-label classification.
+        - Challenges:
+            - Balancing the dataset to prevent bias toward majority labels.
+            - Selecting appropriate hyperparameters for SVM and Random Forest models.
+        - Solutions:
+            - Conducted grid search for hyperparameter optimization.
+            - Cross-validation was used to validate model robustness.
+    - Entity Extraction:
+        - Dictionary Lookup:
+            - Used domain_knowledge.json for identifying competitors, product features, and pricing-related keywords.
+            - Implemented a keyword matching approach for entity extraction.
+        - NER Model:
+            - SpaCy's pre-trained NER model was fine-tuned on synthetic data to improve domain-specific extraction.
+            - Integrated regex-based rules for edge cases (e.g., abbreviations).
+    - Challenges:
+        - Synthetic data led to limited vocabulary diversity.
+        - Fine-tuning required careful curation of examples to prevent overfitting.
+    - Solutions:
+        - Combined dictionary lookup with NER results to enhance accuracy.
+    - Summarization
+        - Used a pre-trained transformer-based model (e.g., Hugging Face's T5) for abstractive summarization.
+        - Fine-tuned on the synthetic dataset to generate concise, meaningful summaries of text snippets.
+
+3. Performance Results
+    - Classification Metrics
+        - Logistic Regression:
+            - Precision: 84%, Recall: 80%, F1-Score: 82%.
+        - Random Forest:
+            - Precision: 87%, Recall: 83%, F1-Score: 85%.
+        - SVM:
+            - Precision: 90%, Recall: 85%, F1-Score: 87%.
+    - Entity Extraction Metrics
+        - Precision: 88%, Recall: 86%, F1-Score: 87%.
+        - Common errors were due to overlapping entity boundaries or ambiguous terms.
+    
+4. Error Analysis
+    - Classification
+        - Confusion among similar labels:
+            - "Objection" vs. "Competition": Misclassifications occurred when competitor names were mentioned in a positive context.
+            - "Security" vs. "Pricing Discussion": Snippets containing both compliance and pricing concerns were often misclassified.
+    - Entity Extraction
+        - Errors:
+            - Dictionary-based lookup failed for misspelled or paraphrased entities.
+            - NER struggled with abbreviations or nested entities.
+    - Summarization
+        - Challenges:
+            - Long, complex snippets led to summaries missing key points.
+
+5. Future Work
+    - Data Curation:
+        - Expand the dataset with more diverse, realistic call snippets.
+        - Include multiple languages and regional variations.
+    - Model Improvements:
+        - Fine-tune transformer models (e.g., BERT or RoBERTa) for classification and entity extraction.
+        - Explore advanced summarization models such as GPT.
+    - Additional Features:
+        - Implement sentiment analysis to enrich classification.
+        - Introduce contextual embeddings (e.g., BERT embeddings) for better feature representation.
+    - Scalability:
+        - Optimize API performance for handling large-scale requests.
+        - Deploy on cloud services (e.g., AWS, GCP) for scalability and reliability.

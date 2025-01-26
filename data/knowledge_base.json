@@ -1,0 +1,46 @@
+{
+    "competitors": [
+        "CompetitorX",
+        "CompetitorY",
+        "CompetitorZ",
+        "VendorA",
+        "RivalB",
+        "CompanyC",
+        "StartupD",
+        "ProviderE",
+        "EnterpriseF"
+    ],
+    "features": [
+        "analytics",
+        "AI engine",
+        "data pipeline",
+        "reporting tools",
+        "workflow automation",
+        "custom integrations",
+        "predictive modeling",
+        "recommendation system"
+    ],
+    "pricing_keywords": [
+        "discount",
+        "renewal cost",
+        "budget",
+        "pricing model",
+        "subscription",
+        "monthly fees",
+        "quote",
+        "billing cycle",
+        "cost structure",
+        "hidden fees"
+    ],
+    "security_concerns": [
+        "SOC2 certified",
+        "data handling",
+        "encryption",
+        "compliance",
+        "data breach risks",
+        "privacy policies",
+        "firewalls",
+        "GDPR compliance",
+        "backup and recovery"
+    ]
+}
