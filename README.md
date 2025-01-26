@@ -1,10 +1,3 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
-### **README**  
-
 # **NLP Inference Pipeline**  
 
 This project implements an end-to-end NLP pipeline for multi-label text classification, entity extraction, and summarization of sales/marketing call snippets. The pipeline includes a REST API built using Flask that processes user input and returns predictions, extracted entities, and a summary in JSON format.  
